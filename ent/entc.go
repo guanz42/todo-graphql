@@ -16,7 +16,7 @@ func main() {
 		entgql.WithSchemaGenerator(),
 		entgql.WithSchemaPath("ent.graphql"),
 		entgql.WithConfigPath("gqlgen.yml"),
-		entgql.WithWhereFilters(true),
+		entgql.WithWhereInputs(true),
 	)
 	if err != nil {
 		log.Fatalf("creating entgql extension: %v", err)
