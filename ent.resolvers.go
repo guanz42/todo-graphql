@@ -7,9 +7,9 @@ package todo
 import (
 	"context"
 
-	"entgo.io/contrib/entgql"
-
 	"todo/ent"
+
+	"entgo.io/contrib/entgql"
 )
 
 // Node is the resolver for the node field.
