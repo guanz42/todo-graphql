@@ -1,9 +1,9 @@
 package todo
 
 import (
-	"todo/ent"
-
 	"github.com/99designs/gqlgen/graphql"
+
+	"todo/ent"
 )
 
 // This file will not be regenerated automatically.

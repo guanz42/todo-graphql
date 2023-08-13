@@ -4,15 +4,16 @@ import (
 	"context"
 	"log"
 	"net/http"
-	"todo"
-	"todo/ent"
-	"todo/ent/migrate"
 
+	"entgo.io/contrib/entgql"
 	"entgo.io/ent/dialect"
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
-
 	_ "github.com/mattn/go-sqlite3"
+
+	"todo"
+	"todo/ent"
+	"todo/ent/migrate"
 )
 
 func main() {
@@ -30,6 +31,7 @@ func main() {
 
 	// Configure the server and start listening on :8081.
 	srv := handler.NewDefaultServer(todo.NewSchema(client))
+	srv.Use(entgql.Transactioner{TxOpener: client})
 	http.Handle("/",
 		playground.Handler("Todo", "/query"),
 	)
