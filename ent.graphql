@@ -69,7 +69,7 @@ type Query {
     last: Int
 
     """Ordering options for Todos returned from the connection."""
-    orderBy: TodoOrder
+    orderBy: [TodoOrder!]
   ): TodoConnection!
 }
 """The builtin Time type"""
