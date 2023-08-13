@@ -36,10 +36,7 @@ func (Todo) Fields() []ent.Field {
 				entgql.OrderField("PRIORITY"),
 			),
 		field.Text("text").
-			NotEmpty().
-			Annotations(
-				entgql.OrderField("TEXT"),
-			),
+			NotEmpty(),
 	}
 }
 
@@ -50,6 +47,7 @@ func (Todo) Edges() []ent.Edge {
 
 func (Todo) Annotations() []schema.Annotation {
 	return []schema.Annotation{
+		entgql.RelayConnection(),
 		entgql.QueryField(),
 		entgql.Mutations(entgql.MutationCreate()),
 	}

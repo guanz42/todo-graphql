@@ -346,20 +346,6 @@ var (
 			}
 		},
 	}
-	// TodoOrderFieldText orders Todo by text.
-	TodoOrderFieldText = &TodoOrderField{
-		Value: func(t *Todo) (ent.Value, error) {
-			return t.Text, nil
-		},
-		column: todo.FieldText,
-		toTerm: todo.ByText,
-		toCursor: func(t *Todo) Cursor {
-			return Cursor{
-				ID:    t.ID,
-				Value: t.Text,
-			}
-		},
-	}
 )
 
 // String implement fmt.Stringer interface.
@@ -372,8 +358,6 @@ func (f TodoOrderField) String() string {
 		str = "STATUS"
 	case TodoOrderFieldPriority.column:
 		str = "PRIORITY"
-	case TodoOrderFieldText.column:
-		str = "TEXT"
 	}
 	return str
 }
@@ -396,8 +380,6 @@ func (f *TodoOrderField) UnmarshalGQL(v interface{}) error {
 		*f = *TodoOrderFieldStatus
 	case "PRIORITY":
 		*f = *TodoOrderFieldPriority
-	case "TEXT":
-		*f = *TodoOrderFieldText
 	default:
 		return fmt.Errorf("%s is not a valid TodoOrderField", str)
 	}

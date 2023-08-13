@@ -6,8 +6,9 @@ package todo
 
 import (
 	"context"
-
 	"todo/ent"
+
+	"entgo.io/contrib/entgql"
 )
 
 // Node is the resolver for the node field.
@@ -21,8 +22,11 @@ func (r *queryResolver) Nodes(ctx context.Context, ids []int) ([]ent.Noder, erro
 }
 
 // Todos is the resolver for the todos field.
-func (r *queryResolver) Todos(ctx context.Context) ([]*ent.Todo, error) {
-	return r.client.Todo.Query().All(ctx)
+func (r *queryResolver) Todos(ctx context.Context, after *entgql.Cursor[int], first *int, before *entgql.Cursor[int], last *int, orderBy *ent.TodoOrder) (*ent.TodoConnection, error) {
+	return r.client.Todo.Query().
+		Paginate(ctx, after, first, before, last,
+			ent.WithTodoOrder(orderBy),
+		)
 }
 
 // Query returns QueryResolver implementation.
